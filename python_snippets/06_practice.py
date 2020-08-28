@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 # Задача: проверить у какого сайта "тяжелее" главная страница.
@@ -6,19 +7,6 @@
 # - подсчитать общий размер этих файлов
 # - вывести на консоль результаты
 
-import requests
-
-from extractor import LinkExtractor
-from utils import time_track
-
-sites = [
-    'https://www.fl.ru',
-    'https://www.weblancer.net/',
-    'https://www.freelancejob.ru/',
-    'https://kwork.ru',
-    'https://work-zilla.com/',
-    'https://iklife.ru/udalennaya-rabota-i-frilans/poisk-raboty/vse-samye-luchshie-sajty-i-birzhi-v-internete.html',
-]
 
 
 class PageSizer:

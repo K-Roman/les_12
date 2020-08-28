@@ -292,7 +292,7 @@ def time_track(func):
 @time_track
 def run_in_one_thread(fishers):
     for fisher in fishers:
-        fisher.run()
+        fisher.run
 
 
 @time_track
@@ -349,7 +349,7 @@ def time_track(func):
 @time_track
 def run_in_one_thread(fishers):
     for fisher in fishers:
-        fisher.run()
+        fisher.run
 
 
 @time_track
@@ -373,7 +373,7 @@ run_in_threads(fishers)
 
 ###
 # Извне завершить поток невозможно штатными средствами пайтона.
-# И это правильно, вот две основные проблемы с "убийством" потока:
+#  И это правильно, вот две основные проблемы с "убийством" потока:
 #   - поток может активно работать с данными в этот момент и принудительное завершениие разрушит их целостность.
 #   - поток может породить другие потоки - их тоже завершать?
 # Что делать? Можно добавить признак выхода:

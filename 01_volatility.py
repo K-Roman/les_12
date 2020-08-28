@@ -74,3 +74,59 @@
 #         <обработка данных>
 
 # TODO написать код в однопоточном/однопроцессорном стиле
+import os
+# '\\Users\\rk\\PycharmProjects\\les_12\\trades\\TICKER_AFH9.csv'
+from collections import defaultdict
+
+folder_in = 'trades'
+ticker_dict = defaultdict(list)
+ticker_volatility = []
+ticker_volatility_zero = []
+
+for dirpath, dirnames, filenames in os.walk(folder_in):
+    for file in filenames:
+        path = os.path.join(dirpath, file)
+
+        with open(path, mode='r') as f:
+            for line in f:
+                secid, tradetime, price, quantity = line.split(',')
+                if secid == "SECID":
+                    continue
+
+                ticker_dict[secid].append(float(price))
+
+
+# Например для бумаги №1:
+#   average_price = (12 + 11) / 2 = 11.5
+#   volatility = ((12 - 11) / average_price) * 100 = 8.7%
+# Для бумаги №2:
+# print(ticker_dict['AFH9'])
+
+
+for ticker in ticker_dict:
+    average_price = (max(ticker_dict[ticker])+min(ticker_dict[ticker]))/2
+    volatility = round(100*(max(ticker_dict[ticker])-min(ticker_dict[ticker]))/average_price,2)
+    if volatility == 0:
+        ticker_volatility_zero.append((ticker, volatility))
+        continue
+    ticker_volatility.append((ticker,volatility))
+ticker_volatility.sort(key=lambda i: i[1], reverse=True)
+ticker_volatility_zero.sort()
+
+
+print('Максимальная волатильность')
+for ticker in ticker_volatility[:3]:
+    print(f'{ticker[0]} - {ticker[1]}%')
+
+print('Минимальная волатильность')
+for ticker in ticker_volatility[-3:]:
+    print(f'{ticker[0]} - {ticker[1]}%')
+
+print('Нулевая волатильность')
+for ticker in ticker_volatility_zero:
+    print(ticker[0])
+
+
+
+
+
